@@ -2,5 +2,6 @@
   position: relative;
   width: 400px;
   height: 400px;
-  background-color: beige;
+  background-color: blanchedalmond;
+  user-select: none;
 }
