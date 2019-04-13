@@ -10,7 +10,7 @@ interface IStartCoords {
 }
 
 function handlerCreatorMouseDown(coords: IStartCoords) {
-  return (event: MouseEvent) => {
+  return (event: MouseEvent) => {    
     coords.startX = event.clientX;
     coords.startY = event.clientY;
   }

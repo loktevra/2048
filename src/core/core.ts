@@ -12,6 +12,13 @@ class GameCore {
     this.setFieldState = setFieldState;
     this.getFieldState = getFieldState;
   }
+  public setScoreStateHandlers = (
+    setScoreState: (sum: number) => void,
+    getScoreState: () => number,
+  ) => {
+    this.setScoreState = setScoreState;
+    this.getScoreState = getScoreState;
+  }
 
   public getInitField = (): INumberBox[] => [{
     x: 0,
@@ -22,7 +29,7 @@ class GameCore {
 
   public step = (direction: EDirections) => {
     const fieldState = this.getFieldState();
-    const newFieldState = moveBoxesInField(fieldState, direction);
+    const newFieldState = moveBoxesInField(fieldState, direction, this.setScoreState);
     
     if (fieldStateEqual(fieldState, newFieldState)) {
       return;
@@ -38,6 +45,9 @@ class GameCore {
 
   private setFieldState: (state: INumberBox[]) => void;
   private getFieldState: () => INumberBox[];
+
+  private setScoreState: (sum: number) => void;
+  private getScoreState: () => number;
 
 }
 

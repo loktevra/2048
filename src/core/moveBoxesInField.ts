@@ -30,7 +30,7 @@ const mapPushToEdge: { [key: string]: (fromBox: INumberBox) => INumberBox } = {
   [EDirections.down]: (fromBox: INumberBox) => ({...fromBox, y: 3} as INumberBox),
 }
 
-export function moveBoxesInField(fieldState: INumberBox[], direction: EDirections): INumberBox[] {
+export function moveBoxesInField(fieldState: INumberBox[], direction: EDirections, addScore: (sum: number) => void): INumberBox[] {
   let newState: INumberBox[] = [];
   fieldState
     .sort(mapSortFunc[direction])
@@ -41,6 +41,7 @@ export function moveBoxesInField(fieldState: INumberBox[], direction: EDirection
         if (toBox.degree === degree) {
           toBox.key = key;
           toBox.degree = degree + 1;
+          addScore(Math.pow(2, toBox.degree));
         } else {
           newState.push(mapPushToBox[direction](fromBox, toBox));
         }
