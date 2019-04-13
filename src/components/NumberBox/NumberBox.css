@@ -4,6 +4,16 @@
   height: 100px;
   text-align: center;
   font: 32px/100px Roboto;
+  transition: opacity 200ms ease-in-out;
+  opacity: 0;
+}
+
+.number_box-entering {
+  opacity: 0;
+}
+
+.number_box-entered {
+  opacity: 1;
 }
 
 .number_box-position_x_0 {

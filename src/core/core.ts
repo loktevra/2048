@@ -42,15 +42,14 @@ class GameCore {
       return;
     }
 
-    this.setFieldState(newFieldState);
+    const nextState = [
+      ...newFieldState,
+      generateNewNumberBox(newFieldState),
+    ];
+    
+    this.setFieldState(nextState)
 
     setTimeout(() => {
-      const nextState = [
-        ...newFieldState,
-        generateNewNumberBox(newFieldState),
-      ];
-      
-      this.setFieldState(nextState)
 
       this.blockedSetps = false;
     }, 500);
