@@ -1,9 +1,48 @@
-import { EDirections } from '../types';
+import { EDirections, INumberBox } from '../types';
 
-let stepDirection: null | EDirections;
+class GameCore {
+  public setFieldStateHandlers = (
+    setFieldState: (state: INumberBox[]) => void,
+    getFieldState: () => INumberBox[],
+  ) => {
+    this.setFieldState = setFieldState;
+    this.getFieldState = getFieldState;
+  }
 
-export function step(direction: EDirections) {
-  console.log('direction', stepDirection, direction);
-  
-  stepDirection = direction;
+  public step = (direction: EDirections) => {
+    const fieldState = this.getFieldState();
+    const newFieldState = fieldState.map<INumberBox>(item => {
+      if (direction === EDirections.right) {
+        return {
+          ...item,
+          x: 3,
+        }
+      }
+      if (direction === EDirections.left) {
+        return {
+          ...item,
+          x: 0,
+        }
+      }
+      if (direction === EDirections.up) {
+        return {
+          ...item,
+          y: 0,
+        }
+      }
+      if (direction === EDirections.down) {
+        return {
+          ...item,
+          y: 3,
+        }
+      }
+    });
+    this.setFieldState(newFieldState)
+  }
+
+  private setFieldState: (state: INumberBox[]) => void;
+  private getFieldState: () => INumberBox[];
+
 }
+
+export const gameCore = new GameCore();

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { step } from '../core';
+import { gameCore } from '../core';
 import { EDirections } from '../types';
 
-const STEP_LENGTH = 100;
+const STEP_LENGTH = 80;
 
 interface IStartCoords {
   startX?: number;
@@ -23,9 +23,9 @@ function handlerCreatorMouseUp(coords: IStartCoords) {
     const xAbs = Math.abs(diffX);
     const yAbs = Math.abs(diffY);
     if (xAbs > yAbs && xAbs > STEP_LENGTH) {
-      step(diffX < 0 ? EDirections.right : EDirections.left);
+      gameCore.step(diffX < 0 ? EDirections.right : EDirections.left);
     } else if (yAbs > STEP_LENGTH) {
-      step(diffY < 0 ? EDirections.down : EDirections.up);
+      gameCore.step(diffY < 0 ? EDirections.down : EDirections.up);
     }
   }
 }

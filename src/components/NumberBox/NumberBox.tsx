@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import './NumberBox.css';
+import { TPositionsCoords } from '../../types';
 
-type TPositionsCoords = 0 | 1 | 2 | 3;
+import './NumberBox.css';
 
 interface INumberBoxProps {
   x: TPositionsCoords;
