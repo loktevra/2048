@@ -28,20 +28,36 @@ class GameCore {
   }]
 
   public step = (direction: EDirections) => {
+    if (this.blockedSetps) {
+      return;
+    }
+    this.blockedSetps = true;
+
     const fieldState = this.getFieldState();
     const newFieldState = moveBoxesInField(fieldState, direction, this.setScoreState);
     
     if (fieldStateEqual(fieldState, newFieldState)) {
+      this.blockedSetps = false;
+
       return;
     }
+
+    this.setFieldState(newFieldState);
+
+    setTimeout(() => {
+      const nextState = [
+        ...newFieldState,
+        generateNewNumberBox(newFieldState),
+      ];
+      
+      this.setFieldState(nextState)
+
+      this.blockedSetps = false;
+    }, 500);
     
-    const nextState = [
-      ...newFieldState,
-      generateNewNumberBox(newFieldState),
-    ];
-    
-    this.setFieldState(nextState)
   }
+
+  private blockedSetps: boolean = false;
 
   private setFieldState: (state: INumberBox[]) => void;
   private getFieldState: () => INumberBox[];
