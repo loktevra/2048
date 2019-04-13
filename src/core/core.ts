@@ -2,7 +2,6 @@ import { EDirections, INumberBox } from './types';
 import { moveBoxesInField } from './moveBoxesInField';
 import { generateNewNumberBox } from './generateNewNumberBox';
 import { creatUniqId } from './creatUniqId';
-import * as R from 'ramda';
 import { fieldStateEqual } from './fieldStateEqual';
 
 class GameCore {

@@ -9,13 +9,21 @@ const map: TPositionsCoords[][] = [
   [3,0], [3,1], [3,2], [3,3],
 ]
 
+function getRandom(max: number) {
+  let rand = Math.random() * max;
+  rand = Math.floor(rand);
+
+  return rand;
+}
+
 export function generateNewNumberBox(fieldState: INumberBox[]): INumberBox {
   const newMapOfEmptyBoxes = R.difference(R.clone(map), fieldState.map(({ x, y}) => [x, y]));
+  const randomIndex = getRandom(newMapOfEmptyBoxes.length)
 
   return {
-    x: newMapOfEmptyBoxes[0][0],
-    y: newMapOfEmptyBoxes[0][1],
-    degree: 1,
+    x: newMapOfEmptyBoxes[randomIndex][0],
+    y: newMapOfEmptyBoxes[randomIndex][1],
+    degree: getRandom(100) > 90 ? 2 : 1,
     key: creatUniqId(),
   }
 }
