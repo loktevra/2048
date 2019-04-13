@@ -1,4 +1,9 @@
-import { EDirections, INumberBox } from '../types';
+import { EDirections, INumberBox } from './types';
+import { moveBoxesInField } from './moveBoxesInField';
+import { generateNewNumberBox } from './generateNewNumberBox';
+import { creatUniqId } from './creatUniqId';
+import * as R from 'ramda';
+import { fieldStateEqual } from './fieldStateEqual';
 
 class GameCore {
   public setFieldStateHandlers = (
@@ -9,35 +14,27 @@ class GameCore {
     this.getFieldState = getFieldState;
   }
 
+  public getInitField = (): INumberBox[] => [{
+    x: 0,
+    y: 0,
+    degree: 1,
+    key: creatUniqId(),
+  }]
+
   public step = (direction: EDirections) => {
     const fieldState = this.getFieldState();
-    const newFieldState = fieldState.map<INumberBox>(item => {
-      if (direction === EDirections.right) {
-        return {
-          ...item,
-          x: 3,
-        }
-      }
-      if (direction === EDirections.left) {
-        return {
-          ...item,
-          x: 0,
-        }
-      }
-      if (direction === EDirections.up) {
-        return {
-          ...item,
-          y: 0,
-        }
-      }
-      if (direction === EDirections.down) {
-        return {
-          ...item,
-          y: 3,
-        }
-      }
-    });
-    this.setFieldState(newFieldState)
+    const newFieldState = moveBoxesInField(fieldState, direction);
+    
+    if (fieldStateEqual(fieldState, newFieldState)) {
+      return;
+    }
+    
+    const nextState = [
+      ...newFieldState,
+      generateNewNumberBox(newFieldState),
+    ];
+    
+    this.setFieldState(nextState)
   }
 
   private setFieldState: (state: INumberBox[]) => void;

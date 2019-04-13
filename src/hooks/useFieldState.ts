@@ -1,21 +1,10 @@
 import * as React from 'react';
 
-import { INumberBox } from '../types';
+import { INumberBox } from '../core/types';
 import { gameCore } from '../core';
 
-const creatUniqId = (function() {
-  let i = 1;
-
-  return () => String(i++);
-})()
-
 export function useFieldState(): INumberBox[] {
-  const [fieldState, setFieldState] = React.useState<INumberBox[]>([{
-    x: 0,
-    y: 0,
-    degree: 1,
-    key: creatUniqId(),
-  }]);
+  const [fieldState, setFieldState] = React.useState<INumberBox[]>(gameCore.getInitField());
 
   gameCore.setFieldStateHandlers((state) => setFieldState(state), () => fieldState);
 

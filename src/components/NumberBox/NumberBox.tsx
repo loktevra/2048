@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { TPositionsCoords } from '../../types';
+import { TPositionsCoords } from '../../core/types';
 
 import './NumberBox.css';
 

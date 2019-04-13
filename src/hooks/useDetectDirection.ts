@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { gameCore } from '../core';
-import { EDirections } from '../types';
+import { EDirections } from '../core/types';
 
 const STEP_LENGTH = 80;
 
