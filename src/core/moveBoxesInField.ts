@@ -34,7 +34,7 @@ const mapPushToEdge: { [key: string]: (fromBox: INumberBox) => INumberBox } = {
  * метод для сдвига плиток, если есть объединяющиеся плитки,
  * вызывает метод addScore для учета очков
  */
-export function moveBoxesInField(fieldState: INumberBox[], direction: EDirections, addScore: (sum: number) => void): INumberBox[] {
+export function moveBoxesInField(fieldState: INumberBox[], direction: EDirections, addScore: (sum: number) => void = () => {}): INumberBox[] {
   let newState: INumberBox[] = [];
   fieldState
     .sort(mapSortFunc[direction])

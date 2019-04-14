@@ -122,7 +122,7 @@ class GameCore {
   private testNextStepExist = () => {
     const fieldState = this.getFieldState();
     for(let dir in EDirections) {
-      const stateLength = moveBoxesInField(fieldState, dir as EDirections, this.setScoreState).length;
+      const stateLength = moveBoxesInField(fieldState, dir as EDirections).length;
       if (stateLength < 16) {
         return true;
       }
