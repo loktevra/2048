@@ -30,6 +30,11 @@ function handlerCreatorMouseUp(coords: IStartCoords) {
   }
 }
 
+/**
+ * хук отслеживания движения мышью
+ * движения меньше 80 пикселей отбрасываются как ложные срабатывания
+ * если движение зафиксировано, вычисляется направление и вызывается метод для хода
+ */
 export function useDetectDirection() {
   const gameField = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {

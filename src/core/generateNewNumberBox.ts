@@ -16,6 +16,9 @@ function getRandom(max: number) {
   return rand;
 }
 
+/**
+ * метод, генерирующий плитку на свободном месте поля
+ */
 export function generateNewNumberBox(fieldState: INumberBox[]): INumberBox {
   const newMapOfEmptyBoxes = R.difference(R.clone(map), fieldState.map(({ x, y}) => [x, y]));
   const randomIndex = getRandom(newMapOfEmptyBoxes.length)

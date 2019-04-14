@@ -4,6 +4,10 @@ import * as R from 'ramda';
 import { INumberBox } from '../core/types';
 import { gameCore } from '../core';
 
+/**
+ * хук для харанения состояния игрового поля
+ * так же навешивает хендлеры для игрового ядра
+ */
 export function useFieldState(): INumberBox[] {
   const [fieldState, setFieldState] = React.useState<INumberBox[]>(gameCore.getInitField());
 
