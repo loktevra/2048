@@ -20,6 +20,12 @@ class GameCore {
     this.getScoreState = getScoreState;
   }
 
+  public setGameOverHandlers = (
+    setGameOverState: (status: boolean, score: number) => void,
+  ) => {
+    this.setGameOverState = setGameOverState;
+  }
+
   public getInitField = (): INumberBox[] => [{
     x: 0,
     y: 0,
@@ -47,7 +53,14 @@ class GameCore {
       generateNewNumberBox(newFieldState),
     ];
     
-    this.setFieldState(nextState)
+    this.setFieldState(nextState)    
+
+    if (nextState.length === 16) {
+      const nextStepExist = this.testNextStepExist();
+      if (!nextStepExist) {
+        this.gameOver();
+      }
+    }
 
     setTimeout(() => {
 
@@ -64,6 +77,27 @@ class GameCore {
   private setScoreState: (sum: number) => void;
   private getScoreState: () => number;
 
+  private setGameOverState: (status: boolean, score?: number) => void;
+
+  private gameOver = () => {
+    this.setGameOverState(true, this.getScoreState());
+  }
+
+  private startNewGame = () => {
+    this.setGameOverState(false);
+    this.setScoreState(0);
+    this.setFieldState(this.getInitField());
+  }
+
+  private testNextStepExist = () => {
+    const fieldState = this.getFieldState();
+    for(let dir in EDirections) {
+      const stateLength = moveBoxesInField(fieldState, dir as EDirections, this.setScoreState).length;
+      if (stateLength < 16) {
+        return true;
+      }
+    }
+  }
 }
 
 export const gameCore = new GameCore();
