@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Score } from '../Score';
 import { GameField } from '../GameField';
 
-import './App.css';
+import './App.scss';
 
 export function App() {
   return (

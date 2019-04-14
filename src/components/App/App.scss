@@ -1,8 +1,8 @@
 .main {
   margin: 0 auto;
   width: 400px;
-}
 
-.main > h1 {
-  text-align: center;
+  > h1 {
+    text-align: center;
+  }
 }

@@ -1,8 +1,10 @@
 const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const autoprefixer = require('autoprefixer');
 
 const baseConfig = {
   entry: './src/index.tsx',
@@ -20,10 +22,35 @@ const baseConfig = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: [
-          'style-loader',
-          'css-loader', 
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [
+                autoprefixer({
+                  browsers:['ie >= 8', 'last 4 version']
+                })
+              ],
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: ['src/**/*'],
+              sourceMap: true
+            }
+          }
         ],
       }
     ]

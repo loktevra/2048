@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { NumberBox } from '../NumberBox';
 import { useDetectDirection } from '../../hooks/useDetectDirection';
-
-import './GameField.css';
 import { useFieldState } from '../../hooks/useFieldState';
+
+import './GameField.scss';
 
 export function GameField() {
   const gameField = useDetectDirection();

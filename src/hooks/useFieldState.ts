@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as R from 'ramda';
 
 import { INumberBox } from '../core/types';
 import { gameCore } from '../core';
@@ -8,5 +9,5 @@ export function useFieldState(): INumberBox[] {
 
   gameCore.setFieldStateHandlers((state) => setFieldState(state), () => fieldState);
 
-  return fieldState
+  return R.sortBy(R.prop('key'), fieldState);
 }

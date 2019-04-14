@@ -1,0 +1,52 @@
+.number_box {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  font: 32px/100px Roboto;
+  transition: opacity 200ms ease-in-out;
+  transition: 200ms;
+  opacity: 0;
+}
+
+.number_box-entering {
+  opacity: 0;
+}
+
+.number_box-entered {
+  opacity: 1;
+}
+
+@for $x from 0 through 3 {
+  @for $y from 0 through 3 {
+    .number_box-position_#{$x}_#{$y} {
+      transform: translate3d($x * 100px, $y * 100px, 0),
+    }
+  }
+}
+
+
+$colors: (
+  #F0F4C3
+  #E6EE9C
+  #DCE775
+  #D4E157
+  #FFEB3B
+  #FDD835
+  #FFCA28
+  #FBC02D
+  #FFB74D
+  #FFA726
+  #FF9800
+  #FB8C00
+  #F57C00
+  #EF6C00
+  #E65100
+  #BF360C
+);
+
+@for $i from 1 through 16 {
+  .number_box-degree_#{$i} {
+    background-color: nth($colors, $i);
+  }
+}
