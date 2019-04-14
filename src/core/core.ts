@@ -33,14 +33,24 @@ class GameCore {
     key: creatUniqId(),
   }]
 
+  public startNewGame = () => {
+    this.setGameOverState(false);
+    this.setScoreState(0);
+    this.setFieldState(this.getInitField());
+  }
+
   public step = (direction: EDirections) => {
     if (this.blockedSetps) {
       return;
     }
     this.blockedSetps = true;
-
+    
     const fieldState = this.getFieldState();
-    const newFieldState = moveBoxesInField(fieldState, direction, this.setScoreState);
+    const newFieldState = moveBoxesInField(
+      fieldState,
+      direction,
+      (add: number) => this.setScoreState(this.getScoreState() + add),
+    );
     
     if (fieldStateEqual(fieldState, newFieldState)) {
       this.blockedSetps = false;
@@ -83,11 +93,6 @@ class GameCore {
     this.setGameOverState(true, this.getScoreState());
   }
 
-  private startNewGame = () => {
-    this.setGameOverState(false);
-    this.setScoreState(0);
-    this.setFieldState(this.getInitField());
-  }
 
   private testNextStepExist = () => {
     const fieldState = this.getFieldState();

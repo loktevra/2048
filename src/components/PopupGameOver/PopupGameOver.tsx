@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { Transition } from 'react-transition-group';
 
 import { useGameOverState } from '../../hooks/useGameOverState';
+import { ButtonNewGame } from '../ButtonNewGame';
 
 import './PopupGameOver.scss';
 
@@ -30,6 +31,7 @@ export function PopupGameOver() {
           <div className="popup">
             <h2>Game over!</h2>
             <div>You`re score: <b>{score}</b></div>
+            <ButtonNewGame />
           </div>
         </div>
       )}
