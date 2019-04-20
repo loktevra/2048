@@ -28,21 +28,18 @@ function changeCoordsOnEndMove(coords: IStartCoords, x: number, y: number) {
 
 function handlerCreatorMouseDown(coords: IStartCoords) {
   return (event: MouseEvent) => {
-    console.log('handlerCreatorMouseDown', event);
     changeCoordsOnStartMove(coords, event.clientX, event.clientY);
   }
 }
 
 function handlerCreatorMouseUp(coords: IStartCoords) {
   return (event: MouseEvent) => {
-    console.log('handlerCreatorMouseUp', event);
     changeCoordsOnEndMove(coords, event.clientX, event.clientY)
   }
 }
 
 function handlerCreatorTouchStart(coords: IStartCoords) {
   return (event: TouchEvent) => {
-    console.log('handlerCreatorTouchStart', event);
     event.preventDefault();
     changeCoordsOnStartMove(coords, event.targetTouches[0].clientX, event.targetTouches[0].clientY);
   }
@@ -50,7 +47,6 @@ function handlerCreatorTouchStart(coords: IStartCoords) {
 
 function handlerCreatorTouchEnd(coords: IStartCoords) {
   return (event: TouchEvent) => {
-    console.log('handlerCreatorTouchEnd', event);
     event.preventDefault();
     changeCoordsOnEndMove(coords, event.changedTouches[0].clientX, event.changedTouches[0].clientY)
   }
